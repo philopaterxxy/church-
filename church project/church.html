@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration</title>
+  <style>
+    /* CSS Variables for Themes */
+    :root {
+      --background-color: #f4f4f9;
+      --form-background-color: #ffffff;
+      --text-color: #333;
+      --button-color: #4CAF50;
+      --button-hover-color: #45a049;
+      --alert-color: red;
+      --success-color: green;
+    }
+
+    /* Night Mode Variables */
+    [data-theme="night"] {
+      --background-color: #1e1e2f;
+      --form-background-color: #2b2b3b;
+      --text-color: #ffffff;
+      --button-color: #6e8efb;
+      --button-hover-color: #575fcf;
+      --alert-color: #ff4d4d;
+      --success-color: #4cd137;
+    }
+
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--background-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Form Container */
+    .form-container {
+      background: var(--form-background-color);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 400px;
+      animation: fadeIn 1s ease-in-out;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .form-container h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* Label and Input Styles */
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    input[type="text"], input[type="tel"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    input[type="text"]:focus, input[type="tel"]:focus {
+      border-color: var(--button-color);
+      box-shadow: 0 0 8px rgba(110, 142, 251, 0.6);
+      outline: none;
+    }
+
+    /* Alert Style */
+    .alert {
+      color: var(--alert-color);
+      font-weight: bold;
+      margin-top: -10px;
+      margin-bottom: 10px;
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .success {
+      color: var(--success-color);
+    }
+
+    /* Rainbow Hover Button */
+    .rainbow-hover {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ff7576;
+      background-color: #2B3044;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 12px 24px;
+      position: relative;
+      line-height: 24px;
+      border-radius: 9px;
+      box-shadow: 0px 1px 2px #2B3044, 0px 4px 16px #2B3044;
+      transform-style: preserve-3d;
+      transform: scale(var(--s, 1)) perspective(600px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+      perspective: 600px;
+      transition: transform 0.1s;
+      width: 100%;
+    }
+
+    .sp {
+      background: linear-gradient(90deg, #866ee7, #ea60da, #ed8f57, #fbd41d, #2cca91);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      display: block;
+    }
+
+    .rainbow-hover:active {
+      transition: 0.3s;
+      transform: scale(0.93);
+    }
+
+    /* Theme Toggle Switch */
+    #checkbox-input {
+      display: none;
+    }
+
+    .switch {
+      width: fit-content;
+      padding: 10px;
+      background-color: rgb(46, 46, 46);
+      border-radius: 50px;
+      z-index: 1;
+      cursor: pointer;
+      display: flex;
+      transition: all 0.7s;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    #checkbox-input:checked + .switch {
+      background-color: rgb(161, 91, 0);
+      box-shadow: 0px 0px 100px rgb(255, 196, 0);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Uiverse.io Toggle Switch -->
+  <div>
+    <input id="checkbox-input" type="checkbox" onchange="toggleTheme()" />
+    <label class="switch" for="checkbox-input">
+      <svg
+        xml:space="preserve"
+        style="enable-background:new 0 0 128 128"
+        viewBox="0 0 128 128"
+        height="3em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M77.547 120.684h-5.765l-1.698 3.012a7.477 7.477 0 0 1-6.513 3.804h-.003a7.479 7.479 0 0 1-6.513-3.804l-1.698-3.012h-5.765v-4.06h27.956v4.06z"
+          style="fill:#51514c"
+        ></path>
+        <path
+          d="M77.547 113.65H49.591v-4.279h27.956v4.279zm0-11.711H49.591v4.279h27.956v-4.279zm38.587-32.576-12.209-3.271.92-3.434 12.209 3.271-.92 3.434zm-104.268 0-.92-3.434 12.209-3.271.92 3.434-12.209 3.271zm92.979-24.913-.92-3.434 12.209-3.272.92 3.434-12.209 3.272zm-81.69 0-12.209-3.272.92-3.434 12.209 3.272-.92 3.434zM94.82 25.247l-2.514-2.514 8.938-8.938 2.514 2.514-8.938 8.938zm-61.64 0-8.937-8.938 2.514-2.514 8.937 8.938-2.514 2.514zm43.358-11.618-3.434-.92L76.376.5l3.434.92-3.272 12.209zm-25.076 0L48.191 1.42 51.625.5l3.272 12.209-3.435.92z"
+          style="fill:#a7a79b"
+        ></path>
+        <path
+          d="M59.802 64.141h7.535v34.934h-7.535V64.141zm3.767-44.754c-18.485-.53-33.631 14.817-33.631 33.824 0 9.781 4.016 18.581 10.431 24.753 5.637 5.423 9.222 13.147 9.222 21.111h7.84V64.141H51.75c-4.44 0-8.051-3.612-8.051-8.051s3.612-8.051 8.051-8.051 8.052 3.612 8.052 8.051v5.681h7.535V56.09c0-4.44 3.612-8.051 8.052-8.051 4.44 0 8.051 3.612 8.051 8.051s-3.612 8.051-8.051 8.051h-5.682v34.934h7.84c0-7.964 3.584-15.688 9.222-21.111C93.184 71.792 97.2 62.992 97.2 53.211c0-19.008-15.146-34.355-33.631-33.824zM51.75 50.408a5.687 5.687 0 0 0-5.681 5.681 5.687 5.687 0 0 0 5.681 5.681h5.682v-5.681a5.688 5.688 0 0 0-5.682-5.681zM75.389 61.77h-5.682v-5.681a5.688 5.688 0 0 1 5.682-5.681 5.687 5.687 0 0 1 5.681 5.681 5.687 5.687 0 0 1-5.681 5.681z"
+          style="fill:#ffffff"
+        ></path>
+      </svg>
+    </label>
+  </div>
+
+  <!-- Form Container -->
+  <div class="form-container">
+    <h1>Register</h1>
+    <form id="registrationForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" placeholder="Enter your phone number" pattern="[0-9]+" required>
+      <div id="alert" class="alert"></div>
+      <button class="rainbow-hover" type="button" onclick="register()">
+        <span class="sp">Register</span>
+      </button>
+    </form>
+  </div>
+
+  <script>
+    // Theme Toggle Logic
+    function toggleTheme() {
+      const body = document.body;
+      const checkbox = document.getElementById('checkbox-input');
+      
+      // Switch theme based on checkbox
+      if (checkbox.checked) {
+        body.setAttribute('data-theme', 'night');
+      } else {
+        body.removeAttribute('data-theme');
+      }
+    }
+
+    // Registration Logic
+    function register() {
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const alertDiv = document.getElementById('alert');
+
+      if (!name || !phone) {
+        alertDiv.textContent = 'Please fill in all fields.';
+        alertDiv.style.display = 'block';
+        alertDiv.classList.remove('success');
+        return;
+      }
+
+      // Get the current list of users or initialize a new array
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+
+      // Check if the name already exists
+      const nameExists = users.some(user => user.name.toLowerCase() === name.toLowerCase());
+
+      if (nameExists) {
+        alertDiv.textContent = `The name "${name}" is already registered. Do you know this?`;
+        alertDiv.style.display = 'block';
+        alertDiv.classList.remove('success');
+        return;
+      }
+
+      // Add the new user
+      users.push({ name, phone });
+
+      // Save the updated list back to localStorage
+      localStorage.setItem('users', JSON.stringify(users));
+
+      // Show success message
+      alertDiv.textContent = 'Registration successful!';
+      alertDiv.style.display = 'block';
+      alertDiv.classList.add('success');
+
+      // Redirect to the name list page after a short delay
+      setTimeout(() => {
+        window.location.href = 'namelist.html';
+      }, 1500);
+    }
+  </script>
+</body>
+</html>
